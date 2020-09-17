@@ -1,0 +1,13 @@
+background_b: 255
+background_g: 86
+background_r: 69
+rosdistro: 'kinetic
+
+  '
+roslaunch:
+  uris: {host_kaganpc__38005: 'http://kaganpc:38005/'}
+rosversion: '1.12.14
+
+  '
+run_id: 6cd5bb32-d32e-11ea-b861-5404a663192e
+turtlesim: {background_r: 10}

@@ -1,0 +1,8 @@
+prefix=/home/kagan/catkin_ws/install
+
+Name: huskyy
+Description: Description of huskyy
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 
