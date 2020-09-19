@@ -45,11 +45,32 @@ class ReadAndPublish():
 					islenmis_data += enc_data[i]
 			return islenmis_data
 
+
+	#yayınlanacak verinin son halini oluşturmak için
+	def final_form(self, data):
+		temp = []
+		to_publish = ""
+		
+		for i in range(2, len(data) - 2, 5):
+			if data[i] == "1":
+				to_publish += "-"
+			elif data[i] == "0":
+				to_publish += ""
+			to_publish += "".join(data[i:i+3])
+			to_publish += " "
+		temp[:0] = to_publish
+		temp[-1] = ""
+		to_publish = "".join(temp)
+		return to_publish
+
+
+
 	#drive için callback fonksiyonu
 	def callback_drive(self, data):
 			seperated_data = "".join(self.seperator(str(data.data)))
 			final_data = self.check_data(seperated_data)
-			self.drive = final_data
+			published_data = self.final_form(final_data)
+			self.drive = published_data
 			self.temp = data.data
 			self.check_corrupted_data()
 			
@@ -58,9 +79,11 @@ class ReadAndPublish():
 	def callback_robotic_arm(self, data):
 			seperated_data = "".join(self.seperator(str(data.data)))
 			final_data = self.check_data(seperated_data)
-			self.robotic_arm = final_data
+			published_data = self.final_form(final_data)
+			self.robotic_arm = published_data
 			self.temp = data.data
 			self.check_corrupted_data()
+	
 	def check_corrupted_data(self):
 		if self.temp[0] != "A" or self.temp[-1] != "B":
 			self.corrupted = 1
@@ -81,20 +104,3 @@ class ReadAndPublish():
 
 if __name__ == "__main__":
 		ReadAndPublish().publish()
-		
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	
-
